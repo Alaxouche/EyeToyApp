@@ -1,0 +1,8 @@
+libusb1==3.4.0
+pillow==12.3.0
+
+# Sortie camera virtuelle. Optionnelle a l'execution : sans elle, ou sans
+# peripherique virtuel enregistre sur le systeme, l'application desactive
+# simplement la case a cocher correspondante.
+numpy==2.5.3
+pyvirtualcam==0.15.0

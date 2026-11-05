@@ -1,0 +1,227 @@
+diff --git a/libwdi.sln b/libwdi.sln
+index c5f15f9..e2525b6 100644
+--- a/libwdi.sln
++++ b/libwdi.sln
+@@ -85,13 +85,9 @@ Global
+ 		{E5A56EE0-182F-470F-8CDC-8C1B7B86EE26}.Release|x64.ActiveCfg = Release|x64
+ 		{E5A56EE0-182F-470F-8CDC-8C1B7B86EE26}.Release|x64.Build.0 = Release|x64
+ 		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Debug|Win32.ActiveCfg = Debug|ARM64
+-		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Debug|Win32.Build.0 = Debug|ARM64
+ 		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Debug|x64.ActiveCfg = Debug|ARM64
+-		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Debug|x64.Build.0 = Debug|ARM64
+ 		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Release|Win32.ActiveCfg = Release|ARM64
+-		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Release|Win32.Build.0 = Release|ARM64
+ 		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Release|x64.ActiveCfg = Release|ARM64
+-		{6AC16F78-F266-4AE0-BD63-550A55F54C15}.Release|x64.Build.0 = Release|ARM64
+ 		{AE83E1B4-CE06-47EE-B7A3-C3A1D7C2D71E}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{AE83E1B4-CE06-47EE-B7A3-C3A1D7C2D71E}.Debug|Win32.Build.0 = Debug|Win32
+ 		{AE83E1B4-CE06-47EE-B7A3-C3A1D7C2D71E}.Debug|x64.ActiveCfg = Debug|x64
+diff --git a/libwdi/.msvc/libwdi_dll.vcxproj b/libwdi/.msvc/libwdi_dll.vcxproj
+index f9601ee..baf7aec 100644
+--- a/libwdi/.msvc/libwdi_dll.vcxproj
++++ b/libwdi/.msvc/libwdi_dll.vcxproj
+@@ -84,7 +84,7 @@
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <Optimization>Disabled</Optimization>
+@@ -110,7 +110,7 @@ embedder embedded.h</Command>
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <Optimization>Disabled</Optimization>
+@@ -136,7 +136,7 @@ embedder embedded.h</Command>
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <Optimization>MinSpace</Optimization>
+@@ -161,7 +161,7 @@ embedder embedded.h</Command>
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <Optimization>MinSpace</Optimization>
+diff --git a/libwdi/.msvc/libwdi_static.vcxproj b/libwdi/.msvc/libwdi_static.vcxproj
+index 5f34e79..1ea92d5 100644
+--- a/libwdi/.msvc/libwdi_static.vcxproj
++++ b/libwdi/.msvc/libwdi_static.vcxproj
+@@ -84,7 +84,7 @@
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <AdditionalIncludeDirectories>..\..\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+@@ -107,7 +107,7 @@ embedder embedded.h</Command>
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <AdditionalIncludeDirectories>..\..\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+@@ -130,7 +130,7 @@ embedder embedded.h</Command>
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <Optimization>MinSpace</Optimization>
+@@ -152,7 +152,7 @@ embedder embedded.h</Command>
+     <PreBuildEvent>
+       <Message>Embedding binary resources</Message>
+       <Command>cd $(ProjectDir)\..
+-embedder embedded.h</Command>
++.\embedder.exe embedded.h</Command>
+     </PreBuildEvent>
+     <ClCompile>
+       <Optimization>MinSpace</Optimization>
+@@ -206,9 +206,6 @@ embedder embedded.h</Command>
+       <Project>{792d44d5-28a7-4eb3-b84b-8021fe3189f9}</Project>
+       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+     </ProjectReference>
+-    <ProjectReference Include="installer_arm64.vcxproj">
+-      <Project>{6ac16f78-f266-4ae0-bd63-550a55f54c15}</Project>
+-    </ProjectReference>
+     <ProjectReference Include="installer_x64.vcxproj">
+       <Project>{e5a56ee0-182f-470f-8cdc-8c1b7b86ee26}</Project>
+       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+diff --git a/libwdi/libwdi.c b/libwdi/libwdi.c
+index 1501b45..fa67b82 100644
+--- a/libwdi/libwdi.c
++++ b/libwdi/libwdi.c
+@@ -723,11 +723,12 @@ BOOL LIBWDI_API wdi_is_driver_supported(int driver_type, VS_FIXEDFILEINFO* drive
+ 
+ 	switch (driver_type) {
+ 	case WDI_WINUSB:
+-#if defined(WDK_DIR)
++		// WDK_DIR used to gate this because WinUSB needed the WDF and WinUSB
++		// coinstallers embedded alongside. This build references neither: they
++		// were only required before Windows 8, Microsoft deprecated them for
++		// Windows 10 and later, and WinUSB.sys itself is in-box. Nothing has to
++		// ship with the library for this driver to install.
+ 		return TRUE;
+-#else
+-		return FALSE;
+-#endif
+ 	case WDI_LIBUSB0:
+ #if defined(LIBUSB0_DIR)
+ 		return (platform_arch == IMAGE_FILE_MACHINE_ARM64 || platform_arch == IMAGE_FILE_MACHINE_AMD64 || platform_arch == IMAGE_FILE_MACHINE_I386);
+diff --git a/libwdi/winusb.inf.in b/libwdi/winusb.inf.in
+index 0c0774e..080003d 100644
+--- a/libwdi/winusb.inf.in
++++ b/libwdi/winusb.inf.in
+@@ -64,37 +64,27 @@ AddReg = #USE_DEVICE_INTERFACE_GUID#
+ [AddDeviceInterfaceGUID]
+ HKR,,DeviceInterfaceGUIDs,0x10000,%DeviceGUID%
+ 
++; Coinstallers are deliberately omitted. They were only ever needed before
++; Windows 8, and Microsoft deprecated them for Windows 10 and later: WinUSB.sys
++; and the KMDF runtime are in-box, and [USB_Install] pulls them in through the
++; system's own winusb.inf. This is the same shape the arm64 sections already had.
+ [USB_Install.NTx86.CoInstallers]
+-AddReg    = CoInstallers_AddReg
+-CopyFiles = CoInstallers_CopyFiles
++;
+ 
+ [USB_Install.NTamd64.CoInstallers]
+-AddReg    = CoInstallers_AddReg
+-CopyFiles = CoInstallers_CopyFiles
++;
+ 
+ [USB_Install.NTarm64.CoInstallers]
+ ;
+ 
+-[CoInstallers_AddReg]
+-HKR,,CoInstallers32,0x00010000,"WdfCoInstaller#WDF_VERSION#.dll,WdfCoInstaller","WinUSBCoInstaller2.dll"
+-
+-[CoInstallers_CopyFiles]
+-WinUSBCoInstaller2.dll
+-WdfCoInstaller#WDF_VERSION#.dll
+-
+-[DestinationDirs]
+-CoInstallers_CopyFiles = 11
+-
+ [SourceDisksNames]
+ 1 = %SourceName%
+ 
+ [SourceDisksFiles.x86]
+-WinUSBCoInstaller2.dll = 1,x86
+-WdfCoInstaller#WDF_VERSION#.dll = 1,x86
++;
+ 
+ [SourceDisksFiles.amd64]
+-WinUSBCoInstaller2.dll = 1,amd64
+-WdfCoInstaller#WDF_VERSION#.dll = 1,amd64
++;
+ 
+ [SourceDisksFiles.arm64]
+-;
+\ No newline at end of file
++;
+diff --git a/msvc/config.h b/msvc/config.h
+index c44d377..4438b23 100644
+--- a/msvc/config.h
++++ b/msvc/config.h
+@@ -23,7 +23,7 @@
+  * match your WinUSB redist directories.
+  */
+ #ifndef WDK_DIR
+-#define WDK_DIR "C:/Program Files (x86)/Windows Kits/8.0"
++// disabled: WinUSB coinstallers are only needed pre-Win8
+ #endif
+ 
+ /* WDK WDF coinstaller version */
+@@ -37,27 +37,27 @@
+ 
+ /* embed libusb0 driver files from the following location */
+ #ifndef LIBUSB0_DIR
+-#define LIBUSB0_DIR "D:/libusb-win32"
++// disabled: no libusb0 driver embedded
+ #endif
+ 
+ /* embed libusbK driver files from the following location */
+ #ifndef LIBUSBK_DIR
+-#define LIBUSBK_DIR "D:/libusbK/bin"
++// disabled: no libusbK driver embedded
+ #endif
+ 
+ /* embed user defined driver files from the following location */
+ #ifndef USER_DIR
+-// #define USER_DIR "C:/signed-driver"
++#define USER_DIR "C:/libwdi-userdir"
+ #endif
+ 
+ /* 32 bit support */
+-#define OPT_M32
++// #define OPT_M32   // x64 only
+ 
+ /* 64 bit support */
+ #define OPT_M64
+ 
+ /* ARM64 support */
+-#define OPT_ARM
++// #define OPT_ARM   // x64 only
+ 
+ /* Debug message logging */
+ //#define ENABLE_DEBUG_LOGGING

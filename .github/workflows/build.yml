@@ -1,0 +1,35 @@
+# Tests et construction de l'executable sur un Windows propre, a chaque push.
+# Sans camera branchee, l'auto-test de build.ps1 rapporte "connected": false :
+# c'est attendu, il verifie alors seulement que le binaire demarre et se ferme.
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Dependances
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          .\.venv\Scripts\python.exe -m pip install --upgrade pip
+          .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+
+      - name: Tests et construction
+        shell: pwsh
+        run: .\build.ps1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EyeToyStudio
+          path: dist/EyeToyStudio.exe
